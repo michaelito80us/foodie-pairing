@@ -1,7 +1,12 @@
-class Api::V1::StoriesController < Api::V1::BaseController
+class Api::V1::UsersController < Api::V1::BaseController
   before_action :set_user, only: %i[show update]
 
   def show
+    #user profile w photo
+    #slots as owner
+    @user.slots = Slot.select(params[:user_id])
+    #booking as foodie
+    @user.bookings = Booking.select(params[:user_id])
   end
 
   def update
