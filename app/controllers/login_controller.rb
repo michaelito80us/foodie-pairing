@@ -4,10 +4,10 @@ class LoginController < ApplicationController
   URL = "https://api.weixin.qq.com/sns/jscode2session".freeze
   def wechat_user
     wechat_params = {
-      appId: ENV["WECHAT_APP_ID"],
-      secret: ENV["WECHAT_APP_SECRET"],
+      appId: ENV["wxf0a6644075208814"],
+      secret: ENV["bc311dae88d5ea9e414c94131513c2bc"],
       js_code: params[:code],
-      grant_type: "authorization_code"
+      grant_type: "authorization_code"   # missing <--------
     }
 
     @wechat_response ||= RestClient.get(URL, params: wechat_params)
