@@ -1,5 +1,6 @@
-class Api::V1::SlotssController < Api::V1::BaseController
-  before_action :set_slot, only: %i[show update destroy ]
+class Api::V1::SlotsController < Api::V1::BaseController
+  before_action :set_slot, only: %i[show destroy]
+  before_action :set_user, only: %i[create]
 
   def index
     @slots = Slot.all
@@ -11,6 +12,7 @@ class Api::V1::SlotssController < Api::V1::BaseController
 
   def create
     @slot = Slot.new(slot_params)
+    @slot.user = @user
     if @slot.save
       render json: { msg: "Created" }
     else
@@ -33,6 +35,10 @@ class Api::V1::SlotssController < Api::V1::BaseController
   end
 
   def slot_params
-    params.require(:slot).permit(:user.id, :date, :time, :restaurant_name, :restaurant_photo, :restaurant_address, :lat, :lon)
+    params.require(:slot).permit(:user_id, :date, :time, :restaurant_name, :restaurant_photo, :restaurant_address, :latitude, :longtitude)
+  end
+
+  def set_user
+    @user = User.find(params[:user_id])
   end
 end
