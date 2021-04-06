@@ -9,7 +9,7 @@ class Api::V1::StoriesController < Api::V1::BaseController
     if @user.update(user_params)
       render json: { msg: "Updated" }
     else
-      render_error(@story)
+      render_error(@users)
     end
   end
 
