@@ -10,8 +10,9 @@ class Api::V1::BookingsController < Api::V1::BaseController
   def create
     # if the fooide send the request feedback  is created.
     @booking = Booking.new(booking_params)
-    @booking.user = @user
-    @booking.slot = @slot
+    @booking.status = 'new'
+    # @booking.user = @user
+    # @booking.slot = @slot
      if @booking.save
         render json: { msg: "Created" }
     else
@@ -33,7 +34,7 @@ class Api::V1::BookingsController < Api::V1::BaseController
   private
 
   def booking_params
-    params.require(:booking).permit(:user_id, :slot_id, :status = 'pending')
+    params.require(:booking).permit(:user_id, :slot_id)
     # pending = 0
     # replied = 1
     # confirmed = 2
@@ -46,7 +47,4 @@ class Api::V1::BookingsController < Api::V1::BaseController
   def set_user
     @user = User.find(parmas[:user_id])
   end
-
-
-
 end
