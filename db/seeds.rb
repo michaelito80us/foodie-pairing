@@ -55,7 +55,8 @@ end
 20.times do
   b = Booking.new(
     slot_id: rand(1..30),
-    user_id: rand(1..10)
+    user_id: rand(1..10),
+    status: 'new'
   )
   puts "booking: #{b}"
   b.save!

@@ -1,6 +1,7 @@
 json.slot do
-  json.extract! @slot, :id, :date, :time, :restaurant_name, :restaurant_photo, :restaurant_address, :latitude, :longtitude
-  # json.created_at @story.created_at.strftime("%Y-%m-%d")
+  json.extract! @slot, :id, :restaurant_name, :restaurant_photo, :restaurant_address, :latitude, :longtitude, :message
+  json.date @slot.date.strftime("%-d %b %Y")
+  json.time @slot.time.strftime("%l:%M %p")
 
   json.user do
     json.extract! @slot.user, :id, :gender, :age, :profession, :favorie_cuisine, :self_introduction, :photo
