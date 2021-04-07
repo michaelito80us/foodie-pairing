@@ -1,12 +1,14 @@
 class Api::V1::UsersController < Api::V1::BaseController
   before_action :set_user, only: %i[show update]
 
+
   def show
     #user profile w photo
     #slots as owner
-    @user.slots = Slot.select(params[:user_id])
+    @slots = Slot.where(user_id: @user.id)
+      # if @slots.empty ?
     #booking as foodie
-    @user.bookings = Booking.select(params[:user_id])
+    @bookings = Booking.where(user_id: @user.id)
   end
 
   def update
