@@ -38,7 +38,7 @@ end
   n+=5
 end
 #   Character.create(name: 'Luke', movie: movies.first)
-15.times do
+30.times do
   s = Slot.new(
     latitude: Faker::Address.latitude,
     longtitude: Faker::Address.longitude,
@@ -50,4 +50,13 @@ end
   )
   puts "slot: #{s}"
   s.save!
+end
+
+20.times do
+  b = Booking.new(
+    slot_id: rand(1..30),
+    user_id: rand(1..10)
+  )
+  puts "booking: #{b}"
+  b.save!
 end
