@@ -22,9 +22,9 @@ class Api::V1::BookingsController < Api::V1::BaseController
 
 
   def show
-    @booking = Booking.joins(:slots).where({ bookings: { status: 'confirmed' } }).joins(:users).where( :booking {user_id: user })
-    @booking = Booking.find(params[:id])
-    # @restaurant_names = @booking.slot.restaurant_name
+    # @booking = Booking.joins(:slots).where({ bookings: { status: 'confirmed' } }).joins(:users).where( booking: {user_id: user })
+    # @booking = Booking.find(params[:id])
+    # # @restaurant_names = @booking.slot.restaurant_name
     # @slot_dates = @booking.slot.date
     # @slot_times = @booking.slot.time
     # @slot_owner = @booking.slot.user
