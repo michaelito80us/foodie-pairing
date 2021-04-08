@@ -1,6 +1,6 @@
 class Api::V1::BookingsController < Api::V1::BaseController
   # before_action :set_user, only: %i[create]
-  # before_action :set_slot, only: %i[create]
+  # before_action :set_slot, only: %i[update]
   before_action :set_booking, only: %i[show update]
 
   # def index
@@ -25,6 +25,10 @@ class Api::V1::BookingsController < Api::V1::BaseController
 
   def update
     if @booking.update(booking_params)
+      @booking.slot.update(open: false) if @booking.status == "accepted"
+      #   @slot = @booking.slot
+      #   @slot.update(open: false)
+      # end
       render json: { msg: "Updated" }
     else
       render_error(@bookings)

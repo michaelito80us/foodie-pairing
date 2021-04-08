@@ -14,7 +14,7 @@
     profession: Faker::Job.title,
     favorie_cuisine: Faker::Restaurant.type,
     self_introduction: Faker::GreekPhilosophers.quote,
-    photo: "https://randomuser.me/api/portraits/men/#{n}.jpg"
+    photo: "https://randomuser.me/api/portraits/men/#{rand(1..100)}.jpg"
   )
   puts "user male: #{namem}"
   namem.save!
@@ -31,7 +31,7 @@ end
     profession: Faker::Job.title,
     favorie_cuisine: Faker::Restaurant.type,
     self_introduction: Faker::GreekPhilosophers.quote,
-    photo: "https://randomuser.me/api/portraits/women/#{n}.jpg"
+    photo: "https://randomuser.me/api/portraits/women/#{rand(1..100)}.jpg"
   )
   puts "user female: #{namef}"
   namef.save!

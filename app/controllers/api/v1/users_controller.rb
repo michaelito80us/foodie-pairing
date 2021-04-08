@@ -3,12 +3,16 @@ class Api::V1::UsersController < Api::V1::BaseController
 
 
   def show
-    #user profile w photo
-    #slots as owner
+
     @slots = Slot.where(user_id: @user.id)
-      # if @slots.empty ?
-    #booking as foodie
-    @bookings = Booking.where(user_id: @user.id)
+    @slots.each do |slot|
+      close_slot(slot)
+      puts slot
+    end
+
+    @pendingbookings = Booking.where("user_id = ? and status = ?", @user.id, "new")
+    
+    @bookings = Booking.where("user_id = ? and status = ?", @user.id, "accepted")
   end
 
   def update
@@ -21,6 +25,10 @@ class Api::V1::UsersController < Api::V1::BaseController
   end
 
   private
+
+  def close_slot(slot)
+    slot.update(open: false) if slot.date < Date.today
+  end
 
   def user_params
     params.require(:user).permit(:name, :age, :gender, :profession, :favorie_cuisine, :self_introduction, :photo)
