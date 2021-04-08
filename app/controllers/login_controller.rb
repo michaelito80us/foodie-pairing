@@ -1,5 +1,5 @@
 class LoginController < ApplicationController
-  skip_before_action :verify_authenticity_token
+   skip_before_action :verify_authenticity_token
 
   URL = "https://api.weixin.qq.com/sns/jscode2session".freeze
   def wechat_user

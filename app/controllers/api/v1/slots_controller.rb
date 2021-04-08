@@ -1,9 +1,9 @@
 class Api::V1::SlotsController < Api::V1::BaseController
   before_action :set_slot, only: %i[show destroy]
-  before_action :set_user, only: %i[create]
+  # before_action :set_user, only: %i[create]
 
   def index
-    @slots = Slot.all
+    @slots = Slot.where("open = ? and DATE(date) > ? ", true, Date.today)
     # render json: @stories #Just for testing
   end
 
@@ -12,13 +12,18 @@ class Api::V1::SlotsController < Api::V1::BaseController
 
   def create
     @slot = Slot.new(slot_params)
-    @slot.user = @user
+    # @slot.user = @user
     if @slot.save
       render json: { msg: "Created" }
     else
       render_error(@slot)
     end
   end
+
+  def update
+    @slot.update(slot_params)
+  end
+
 
   def destroy
     if @slot.destroy
@@ -35,7 +40,7 @@ class Api::V1::SlotsController < Api::V1::BaseController
   end
 
   def slot_params
-    params.require(:slot).permit(:user_id, :date, :time, :restaurant_name, :restaurant_photo, :restaurant_address, :latitude, :longtitude)
+    params.require(:slot).permit(:user_id, :date, :time, :restaurant_name, :restaurant_photo, :restaurant_address, :latitude, :longtitude, :open)
   end
 
   def set_user
