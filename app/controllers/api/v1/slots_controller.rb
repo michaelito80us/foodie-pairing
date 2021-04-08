@@ -24,7 +24,6 @@ class Api::V1::SlotsController < Api::V1::BaseController
     @slot.update(slot_params)
   end
 
-
   def destroy
     if @slot.destroy
       render json: { msg: "Deleted" }

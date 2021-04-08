@@ -1,7 +1,7 @@
 class Api::V1::BookingsController < Api::V1::BaseController
   # before_action :set_user, only: %i[create]
   # before_action :set_slot, only: %i[create]
-  before_action :set_booking, only: %i[show]
+  before_action :set_booking, only: %i[show update]
 
   # def index
   #   # @booking = Booking.joins(:slots).where({ bookings: { status: 'confirmed' } })
@@ -22,6 +22,11 @@ class Api::V1::BookingsController < Api::V1::BaseController
   def show
     # @bookings = Booking.where(user_id: @user.id)
   end
+
+  def update
+    @booking.update(booking_params)
+  end
+  
 
   private
 
