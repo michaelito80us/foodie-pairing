@@ -12,7 +12,7 @@ class Api::V1::SlotsController < Api::V1::BaseController
 
   def create
     @slot = Slot.new(slot_params)
-    @slot.user = @user
+    # @slot.user = @user
     if @slot.save
       render json: { msg: "Created" }
     else
