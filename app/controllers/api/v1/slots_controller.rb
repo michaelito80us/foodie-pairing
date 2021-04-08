@@ -3,7 +3,7 @@ class Api::V1::SlotsController < Api::V1::BaseController
   before_action :set_user, only: %i[create]
 
   def index
-    @slots = Slot.all
+    @slots = Slot.where("open = ?", true)
     # render json: @stories #Just for testing
   end
 
@@ -20,6 +20,11 @@ class Api::V1::SlotsController < Api::V1::BaseController
     end
   end
 
+  def update
+    @slot.update(slot_params)
+  end
+
+
   def destroy
     if @slot.destroy
       render json: { msg: "Deleted" }
@@ -35,7 +40,7 @@ class Api::V1::SlotsController < Api::V1::BaseController
   end
 
   def slot_params
-    params.require(:slot).permit(:user_id, :date, :time, :restaurant_name, :restaurant_photo, :restaurant_address, :latitude, :longtitude)
+    params.require(:slot).permit(:user_id, :date, :time, :restaurant_name, :restaurant_photo, :restaurant_address, :latitude, :longtitude, :open)
   end
 
   def set_user
