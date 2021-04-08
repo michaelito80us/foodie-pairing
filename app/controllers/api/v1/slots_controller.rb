@@ -1,9 +1,9 @@
 class Api::V1::SlotsController < Api::V1::BaseController
   before_action :set_slot, only: %i[show destroy]
-  before_action :set_user, only: %i[create]
+  # before_action :set_user, only: %i[create]
 
   def index
-    @slots = Slot.where("open = ?", true)
+    @slots = Slot.where("open = ? and DATE(date) > ? ", true, Date.today)
     # render json: @stories #Just for testing
   end
 

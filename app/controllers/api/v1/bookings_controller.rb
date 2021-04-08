@@ -1,6 +1,7 @@
 class Api::V1::BookingsController < Api::V1::BaseController
-  before_action :set_user, only: %i[show create]
-  before_action :set_slot, only: %i[show create]
+  # before_action :set_user, only: %i[create]
+  # before_action :set_slot, only: %i[create]
+  before_action :set_booking, only: %i[show]
 
   # def index
   #   # @booking = Booking.joins(:slots).where({ bookings: { status: 'confirmed' } })
@@ -18,8 +19,9 @@ class Api::V1::BookingsController < Api::V1::BaseController
     end
   end
 
-  # def show
-  # end
+  def show
+    # @bookings = Booking.where(user_id: @user.id)
+  end
 
   private
 
@@ -28,10 +30,15 @@ class Api::V1::BookingsController < Api::V1::BaseController
   end
 
   def set_slot
-    @slot = Slot.find(parmas[:slot_id])
+    @slot = Slot.find(params[:slot_id])
   end
 
   def set_user
-    @user = User.find(parmas[:user_id])
+    @user = User.find(params[:user_id])
   end
+
+  def set_booking
+    @booking = Booking.find(params[:id])
+  end
+  
 end
