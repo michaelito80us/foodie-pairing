@@ -24,14 +24,17 @@ class Api::V1::BookingsController < Api::V1::BaseController
   end
 
   def update
-    @booking.update(booking_params)
+    if @booking.update(booking_params)
+      render json: { msg: "Updated" }
+    else
+      render_error(@bookings)
+    end
   end
-  
 
   private
 
   def booking_params
-    params.require(:booking).permit(:user_id, :slot_id)
+    params.require(:booking).permit(:user_id, :slot_id, :status)
   end
 
   def set_slot
@@ -45,5 +48,5 @@ class Api::V1::BookingsController < Api::V1::BaseController
   def set_booking
     @booking = Booking.find(params[:id])
   end
-  
+
 end
