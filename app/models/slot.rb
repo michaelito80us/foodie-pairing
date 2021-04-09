@@ -3,4 +3,7 @@ class Slot < ApplicationRecord
   has_many :bookings
 
   validates :restaurant_name, :date, :time, presence: true
+
+  
+  
 end

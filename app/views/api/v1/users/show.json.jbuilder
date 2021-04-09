@@ -12,6 +12,7 @@ json.user do
   end
 
 json.bookings do
+
     json.array! @bookings do |booking|
       json.extract! booking, :id, :status
       json.user booking.user, :id, :name, :gender, :age, :profession, :favorie_cuisine, :self_introduction, :photo
