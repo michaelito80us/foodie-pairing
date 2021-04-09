@@ -40,7 +40,7 @@ class Api::V1::SlotsController < Api::V1::BaseController
   end
 
   def slot_params
-    params.require(:slot).permit(:user_id, :date, :time, :restaurant_name, :restaurant_photo, :restaurant_address, :latitude, :longtitude, :open)
+    params.require(:slot).permit(:user_id, :date, :time, :restaurant_name, :restaurant_photo, :restaurant_address, :latitude, :longtitude, :open, :message)
   end
 
   def set_user
