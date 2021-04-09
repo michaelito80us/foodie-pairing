@@ -1,10 +1,15 @@
 class Api::V1::SlotsController < Api::V1::BaseController
   before_action :set_slot, only: %i[show destroy]
-  # before_action :set_user, only: %i[create]
+  before_action :set_user, only: %i[index]
 
   def index
-    @slots = Slot.where("open = ? and DATE(date) > ? ", true, Date.today)
-    # render json: @stories #Just for testing
+    @slots = Slot.where("open = ? and DATE(date) > ? and user_id != ?", true, Date.today, @user.id)
+    @slots.order!({ date: :asc })
+
+    @slotstofalse = Slot.where("DATE(date) < ? and open = ?", Date.today, true)
+    @slotstofalse.each do |slot|
+      slot.update(open: false)
+    end
   end
 
   def show
@@ -23,7 +28,6 @@ class Api::V1::SlotsController < Api::V1::BaseController
   def update
     @slot.update(slot_params)
   end
-
 
   def destroy
     if @slot.destroy
