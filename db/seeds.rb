@@ -61,3 +61,13 @@ end
   puts "booking: #{b}"
   b.save!
 end
+
+20.times do
+  bo = Booking.new(
+    slot_id: rand(1..30),
+    user_id: rand(1..10),
+    status: 'accepted'
+  )
+  puts "confirmed booking: #{bo}"
+  bo.save!
+end
