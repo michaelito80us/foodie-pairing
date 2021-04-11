@@ -5,6 +5,7 @@ class Api::V1::SlotsController < Api::V1::BaseController
   def index
     @slots = Slot.where("open = ? and DATE(date) > ? and user_id != ?", true, Date.today, @user.id)
     @slots.order!({ date: :asc })
+    
 
     @slotstofalse = Slot.where("DATE(date) < ? and open = ?", Date.today, true)
     @slotstofalse.each do |slot|
